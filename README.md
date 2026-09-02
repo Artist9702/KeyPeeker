@@ -1,6 +1,6 @@
 # KeyPeeker
 <p align="center">
-  <img src="docs/screenshot.png" width="820" alt="KeyPeeker 效果演示"/>
+  <img src="docs/screenshot-home.png" width="820" alt="KeyPeeker 效果演示"/>
 </p>
 
 
