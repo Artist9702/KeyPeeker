@@ -1,4 +1,8 @@
 # KeyPeeker
+<p align="center">
+  <img src="docs/screenshot.png" width="820" alt="KeyPeeker 效果演示"/>
+</p>
+
 
 在任何应用里按一下，弹出**当前应用的快捷键列表**——类 macOS CheatSheet，Windows 原生实现。
 
