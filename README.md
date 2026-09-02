@@ -2,10 +2,6 @@
 
 在任何应用里按一下，弹出**当前应用的快捷键列表**——类 macOS CheatSheet，Windows 原生实现。
 
-<p align="center">
-  <img src="docs/screenshot.png" width="820" alt="KeyPeeker 效果演示：记事本快捷键居中弹窗"/>
-</p>
-
 ## 它是怎么工作的
 
 1. 全局监听键盘（低级钩子，只监听、不吞键）。
