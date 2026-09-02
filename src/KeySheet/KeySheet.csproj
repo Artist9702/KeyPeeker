@@ -14,6 +14,8 @@
     <Description>任意应用下触发，弹出该应用的快捷键列表</Description>
     <ApplicationIcon>appicon.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <DebugType>none</DebugType>
+    <SatelliteResourceLanguages>zh-CN;en</SatelliteResourceLanguages>
   </PropertyGroup>
 
   <ItemGroup>

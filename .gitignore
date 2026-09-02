@@ -4,7 +4,9 @@ obj/
 *.user
 .testdata/
 startup.log
-*.png
+# 开发用截图不入库；docs/screenshot.png 是仓库主页效果图，需保留
+效果验证*.png
+Apple风格*.png
 *.jpg
 *.jpeg
 *.zip
