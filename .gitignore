@@ -1,0 +1,9 @@
+bin/
+obj/
+.vs/
+*.user
+.testdata/
+startup.log
+*.png
+*.jpg
+*.jpeg

@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>KeyPeeker</AssemblyName>
+    <AssemblyTitle>KeyPeeker 快捷键助手</AssemblyTitle>
+    <Product>KeyPeeker</Product>
+    <Description>任意应用下触发，弹出该应用的快捷键列表</Description>
+    <ApplicationIcon>appicon.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 内置预设：随构建产物分发，首次运行复制到 %APPDATA%\KeySheet\presets -->
+    <Content Include="Presets\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <!-- 应用图标：供托盘在运行目录加载 -->
+    <Content Include="appicon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <!-- WinForms 只通过显式 using 使用（托盘），避免 System.Drawing/System.Windows.Forms 全局隐式 using 与 WPF 命名冲突 -->
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+    <!-- 此项目模板生成的隐式 using 缺 System.IO（File/Path/Directory），补上 -->
+    <Using Include="System.IO" />
+  </ItemGroup>
+
+</Project>

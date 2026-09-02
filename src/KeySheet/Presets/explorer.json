@@ -1,0 +1,37 @@
+{
+  "processName": "explorer",
+  "displayName": "文件资源管理器",
+  "appliesToNote": "Windows 10/11，手工维护，个别条目因系统版本略有差异",
+  "groups": [
+    {
+      "name": "导航与地址栏",
+      "items": [
+        { "keys": "Ctrl+L", "description": "定位到地址栏（可输入路径）" },
+        { "keys": "Ctrl+E", "description": "聚焦搜索框" },
+        { "keys": "F4", "description": "展开地址栏历史下拉" },
+        { "keys": "Alt+Up", "description": "返回上一级文件夹" },
+        { "keys": "Alt+Left", "description": "后退" },
+        { "keys": "Alt+Right", "description": "前进" }
+      ]
+    },
+    {
+      "name": "文件与文件夹",
+      "items": [
+        { "keys": "Ctrl+N", "description": "新开一个资源管理器窗口" },
+        { "keys": "Ctrl+Shift+N", "description": "新建文件夹" },
+        { "keys": "Ctrl+T", "description": "新开标签页（Windows 11 22H2+）" },
+        { "keys": "Ctrl+Shift+T", "description": "重新打开刚关闭的标签页（Windows 11 22H2+）" },
+        { "keys": "Ctrl+W", "description": "关闭当前窗口/标签页" },
+        { "keys": "F2", "description": "重命名选中项" },
+        { "keys": "F5", "description": "刷新" },
+        { "keys": "F11", "description": "全屏/退出全屏" },
+        { "keys": "Delete", "description": "删除到回收站" },
+        { "keys": "Shift+Delete", "description": "永久删除（不进回收站）" },
+        { "keys": "Ctrl+D", "description": "删除选中项（到回收站）" },
+        { "keys": "Alt+Enter", "description": "打开选中项的“属性”" },
+        { "keys": "Shift+F10", "description": "打开右键菜单" },
+        { "keys": "Alt+P", "description": "显示/隐藏预览窗格" }
+      ]
+    }
+  ]
+}

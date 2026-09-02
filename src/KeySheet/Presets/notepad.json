@@ -1,0 +1,43 @@
+{
+  "processName": "notepad",
+  "displayName": "记事本",
+  "appliesToNote": "新版记事本（Windows 11）；Win10 经典记事本走“实时读取”，不会用到本文件",
+  "groups": [
+    {
+      "name": "文件",
+      "items": [
+        { "keys": "Ctrl+N", "description": "新建" },
+        { "keys": "Ctrl+O", "description": "打开" },
+        { "keys": "Ctrl+S", "description": "保存" },
+        { "keys": "Ctrl+Shift+S", "description": "另存为" },
+        { "keys": "Ctrl+W", "description": "关闭当前标签页" },
+        { "keys": "Ctrl+P", "description": "打印" }
+      ]
+    },
+    {
+      "name": "编辑",
+      "items": [
+        { "keys": "Ctrl+Z", "description": "撤销" },
+        { "keys": "Ctrl+Y", "description": "重做" },
+        { "keys": "Ctrl+X", "description": "剪切" },
+        { "keys": "Ctrl+C", "description": "复制" },
+        { "keys": "Ctrl+V", "description": "粘贴" },
+        { "keys": "Ctrl+A", "description": "全选" },
+        { "keys": "Ctrl+F", "description": "查找" },
+        { "keys": "Ctrl+H", "description": "替换" },
+        { "keys": "F3", "description": "查找下一个" },
+        { "keys": "Shift+F3", "description": "查找上一个" },
+        { "keys": "Ctrl+G", "description": "转到指定行" },
+        { "keys": "F5", "description": "插入当前时间与日期" }
+      ]
+    },
+    {
+      "name": "视图",
+      "items": [
+        { "keys": "Ctrl+Plus", "description": "放大文字（Ctrl+加号）" },
+        { "keys": "Ctrl+Minus", "description": "缩小文字（Ctrl+减号）" },
+        { "keys": "Ctrl+0", "description": "恢复默认缩放" }
+      ]
+    }
+  ]
+}
