@@ -119,6 +119,59 @@ public partial class App : Application
         _tray.UpdateHoverText($"{AppName}\n长按 Ctrl 或按 {ToggleDisplay()} 查看当前应用快捷键");
         _tray.ShowStartupTip($"已启动：在任意应用里按住 Ctrl 约 0.6 秒，或按 {ToggleDisplay()}，即可查看该应用的快捷键。");
         Log("托盘就绪，进入运行。");
+        EnsureAutoStartConsistent(); // 文件夹移动后自动修正/清理自启入口
+        TryFirstRunAutoStartPrompt();
+    }
+
+    /// <summary>自启自愈：若配置要求自启但入口丢失/路径已变（文件夹被移动），自动改写为当前 exe 路径；否则清理失效入口。</summary>
+    private void EnsureAutoStartConsistent()
+    {
+        try
+        {
+            bool entry = AutoStart.HasEntry();
+            if (_config.Startup.AutoStart)
+            {
+                if (!entry || !AutoStart.IsEnabled())
+                {
+                    bool ok = AutoStart.SetEnabled(true);
+                    Log(ok ? "自启自愈：入口已更新到当前 exe 位置" : "自启自愈失败（系统拒绝写入）");
+                }
+            }
+            else
+            {
+                if (entry)
+                {
+                    AutoStart.SetEnabled(false);
+                    Log("自启自愈：清理了失效/多余的启动入口（可在 设置③ 重新开启）");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log($"自启自愈异常: {ex.Message}");
+        }
+    }
+
+    /// <summary>首次运行弹一次“是否开机自启”（之后可在设置 ③ 修改）。</summary>
+    private void TryFirstRunAutoStartPrompt()
+    {
+        try
+        {
+            if (_config.Startup.AutoStartPrompted || AutoStart.IsEnabled()) return;
+            _config.Startup.AutoStartPrompted = true; // 先落标记：无论选什么都只问一次
+            var r = MessageBox.Show(
+                "是否让 KeyPeeker 开机自动启动？\n\n选择“是”后，每次开机都会自动在后台运行，无需再双击。\n（之后随时可在 托盘→设置→③ 开机自启 中修改）",
+                AppName, MessageBoxButton.YesNo, MessageBoxImage.Question);
+            bool want = r == MessageBoxResult.Yes;
+            bool ok = AutoStart.SetEnabled(want);
+            _config.Startup.AutoStart = want;
+            _config.Save(AppPaths.ConfigFile);
+            Log($"首次运行自启询问: 选择={(want ? "是" : "否")} 设置={(ok ? "成功" : "失败")}");
+        }
+        catch (Exception ex)
+        {
+            Log($"首次运行自启询问异常: {ex.Message}");
+        }
     }
 
     /// <summary>把启动关键步骤写入日志：优先 {数据目录}\startup.log，数据目录就绪前写 %TEMP%\keysheet-startup.log。</summary>

@@ -7,3 +7,5 @@ startup.log
 *.png
 *.jpg
 *.jpeg
+*.zip
+dist/

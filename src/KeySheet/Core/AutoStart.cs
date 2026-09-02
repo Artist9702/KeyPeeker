@@ -16,7 +16,21 @@ public static class AutoStart
         try
         {
             using var key = Registry.CurrentUser.OpenSubKey(RunKeyPath, writable: false);
-            return key?.GetValue(ValueName) as string == ExePath;
+            return key?.GetValue(ValueName) as string == $"\"{ExePath}\"";
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /// <summary>Run 键里是否存在本应用的启动项（无论指向哪里）。</summary>
+    public static bool HasEntry()
+    {
+        try
+        {
+            using var key = Registry.CurrentUser.OpenSubKey(RunKeyPath, writable: false);
+            return key?.GetValue(ValueName) is not null;
         }
         catch
         {

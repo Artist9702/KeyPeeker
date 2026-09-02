@@ -37,6 +37,8 @@ public sealed class AppConfig
     {
         /// <summary>是否开机自启（写入 HKCU 的 Run 键）。</summary>
         public bool AutoStart { get; set; } = false;
+        /// <summary>是否已经弹过“首次运行询问开机自启”（只弹一次）。</summary>
+        public bool AutoStartPrompted { get; set; } = false;
     }
 
     public sealed class HoldToShowConfig
