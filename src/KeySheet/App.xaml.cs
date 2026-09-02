@@ -382,7 +382,8 @@ public partial class App : Application
             return;
         }
         _settingsWindow = new SettingsWindow(_config, SaveAndApplyConfig,
-            GetForegroundApp, AiGenerateCoreAsync, _presets, _overrides);
+            GetForegroundApp, AiGenerateCoreAsync, _presets, _overrides,
+            () => _overlay.IsVisible, HideOverlay);
         _settingsWindow.Closed += (_, _) => _settingsWindow = null;
         _settingsWindow.Show();
     }

@@ -23,6 +23,8 @@ public sealed class SettingsWindow : Window
     private readonly AiGenerator _aiGenerate;
     private readonly PresetStore _presets;
     private readonly OverrideStore _overrides;
+    private readonly Func<bool> _overlayVisible;
+    private readonly Action _closeOverlay;
 
     // ---------- 侧边栏页 ----------
     private ListBox _nav;
@@ -88,7 +90,8 @@ public sealed class SettingsWindow : Window
 
     public SettingsWindow(AppConfig config, Action<AppConfig> onSaved,
                           ForegroundProvider getForeground, AiGenerator aiGenerate,
-                          PresetStore presets, OverrideStore overrides)
+                          PresetStore presets, OverrideStore overrides,
+                          Func<bool> overlayVisible, Action closeOverlay)
     {
         _config = config;
         _onSaved = onSaved;
@@ -96,6 +99,8 @@ public sealed class SettingsWindow : Window
         _aiGenerate = aiGenerate;
         _presets = presets;
         _overrides = overrides;
+        _overlayVisible = overlayVisible;
+        _closeOverlay = closeOverlay;
 
         Title = "KeyPeeker 设置";
         Width = 960;
@@ -638,9 +643,20 @@ public sealed class SettingsWindow : Window
 
     private void WindowPreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
-        if (_captureItemKey is null) return;
-
         var key = e.Key == System.Windows.Input.Key.System ? e.SystemKey : e.Key;
+
+        // 双保险：设置窗口自身也能用 Esc 关闭“AI 补齐后弹出”的浮层（避免 IME 吞掉全局钩子的 Esc）
+        if (key == System.Windows.Input.Key.Escape && _captureItemKey is null)
+        {
+            if (_overlayVisible())
+            {
+                _closeOverlay();
+                e.Handled = true;
+            }
+            return;
+        }
+
+        if (_captureItemKey is null) return;
         if (key == System.Windows.Input.Key.Escape)
         {
             CancelCapture("已取消改键");
